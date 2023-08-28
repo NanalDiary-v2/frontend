@@ -1,68 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
-import axios_api from '../../config/Axios';
+import React, { useEffect } from 'react';
 import { onLogin } from '../../config/Login';
+import FriendAddScript from '../../scripts/friend/FriendAdd';
 
 function FriendAdd() {
-  const [friendList, setFriendList] = useState([]);
-
-  const searchFriend = (e) => {
-    e.preventDefault();
-    const userIdx = e.target.searchId.value;
-
-    axios_api
-      .get(`search/user/${userIdx}`)
-      .then(({ data }) => {
-        if (data.statusCode === 200) {
-          if (data.data.responseMessage === '친구 조회 성공') {
-            // console.log(data.data.userInfo);
-            setFriendList(data.data.userInfo);
-          } else {
-            console.log('친구 조회 오류 : ');
-            console.log(data.statusCode);
-            console.log(data.data.responseMessage);
-          }
-        }
-      })
-      .catch(({ error }) => {
-        console.log('친구 조회 오류 : ' + error);
-      });
-  };
-
-  const addFriend = (e, useridx) => {
-    e.preventDefault();
-
-    axios_api
-      .post(`notification/friend`, { userIdx: [useridx] })
-      .then(({ data }) => {
-        if (data.statusCode === 200) {
-          if (data.data.responseMessage === '알림 저장 성공') {
-            Swal.fire({
-              title: '친구 추가',
-              icon: 'success', // Alert 타입
-              text: '요청이 완료되었습니다!', // Alert 내용
-              width: '35%',
-            })
-            //   .then(function () {
-            //   window.location.reload(true);
-            // });
-          } else {
-            console.log('친구 추가 알림 저장 오류 : ');
-            console.log(data.statusCode);
-            console.log(data.data.responseMessage);
-          }
-        }
-      })
-      .catch(({ error }) => {
-        console.log('친구 추가 알림 저장 오류 : ' + error);
-      });
-  };
+  const friendList = FriendAddScript.friendList;
+  const searchFriend = FriendAddScript.searchFriend;
+  const addFriend = FriendAddScript.addFriend;
 
   useEffect(() => {
     onLogin();
   }, []);
+
   return (
-    <div className="w-84 h-[430px] overflow-auto">
+    <div className='w-84 h-[430px] overflow-auto'>
       <p className='box-border flex justify-around h-20 p-4 w-70'>
         찾고자 하는 친구의 아이디를 <br />
         입력 후 검색해주세요
@@ -95,4 +45,5 @@ function FriendAdd() {
     </div>
   );
 }
+
 export default FriendAdd;

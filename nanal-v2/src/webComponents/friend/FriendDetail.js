@@ -5,14 +5,13 @@ import { onLogin } from '../../config/Login';
 function FriendDetail(userIdx) {
   const [friend, setFriend] = useState([]);
   const [imgList, setImgList] = useState([]);
-  // console.log('제일밖')
+
   useEffect(() => {
     onLogin();
-    // console.log('밖')
+
     axios_api
       .get(`/friend/${userIdx.userIdx}`)
       .then(({ data }) => {
-        // console.log('안')
         if (data.statusCode === 200) {
           setFriend(null);
           if (data.data.responseMessage === '친구 조회 성공') {

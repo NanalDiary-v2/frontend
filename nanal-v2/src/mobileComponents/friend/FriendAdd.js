@@ -1,64 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
-import axios_api from '../../config/Axios';
+import React, { useEffect } from 'react';
 import { onLogin } from '../../config/Login';
+import FriendAddScript from '../../scripts/friend/FriendAdd';
 
 function FriendAdd() {
-  const [friendList, setFriendList] = useState([]);
-
-  const searchFriend = (e) => {
-    e.preventDefault();
-    const userId = e.target.searchId.value;
-
-    axios_api
-      .get(`search/user/${userId}`)
-      .then(({ data }) => {
-        if (data.statusCode === 200) {
-          if (data.data.responseMessage === '친구 조회 성공') {
-            // console.log(data.data.userInfo);
-            setFriendList(data.data.userInfo);
-          } else {
-            console.log('친구 조회 오류 : ');
-            console.log(data.statusCode);
-            console.log(data.data.responseMessage);
-          }
-        }
-      })
-      .catch(({ error }) => {
-        console.log('친구 조회 오류 : ' + error);
-      });
-  };
-
-  const addFriend = (e, useridx) => {
-    e.preventDefault();
-
-    axios_api
-      .post(`notification/friend`, { userIdx: [useridx] })
-      .then(({ data }) => {
-        if (data.statusCode === 200) {
-          if (data.data.responseMessage === '알림 저장 성공') {
-            Swal.fire({
-              icon: 'success', // Alert 타입
-              text: '친구 추가를 요청했어요!', // Alert 내용
-              width: '80%',
-            }).then(function () {
-              window.location.reload(true);
-            });
-          } else {
-            console.log('친구 추가 알림 저장 오류 : ');
-            console.log(data.statusCode);
-            console.log(data.data.responseMessage);
-          }
-        }
-      })
-      .catch(({ error }) => {
-        console.log('친구 추가 알림 저장 오류 : ' + error);
-      });
-  };
+  const friendList = FriendAddScript.friendList;
+  const searchFriend = FriendAddScript.searchFriend;
+  const addFriend = FriendAddScript.addFriend;
 
   useEffect(() => {
     onLogin();
   }, []);
+
   return (
     <div>
       <p className='box-border flex justify-around h-20 p-4 w-70'>
@@ -72,9 +24,9 @@ function FriendAdd() {
         <input
           type='text'
           id='searchId'
-          className='pl-2 rounded-lg w-full h-18 m-auto'
+          className='w-full pl-2 m-auto rounded-lg h-18'
         />
-        <button type='submit' className='w-16 h-18 m-auto'>
+        <button type='submit' className='w-16 m-auto h-18'>
           검색하기
         </button>
       </form>
@@ -98,4 +50,5 @@ function FriendAdd() {
     </div>
   );
 }
+
 export default FriendAdd;
