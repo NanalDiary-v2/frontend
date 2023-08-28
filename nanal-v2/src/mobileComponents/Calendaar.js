@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import '../src_assets/css/Calendar.css';
 import { Link, useNavigate } from 'react-router-dom';
-import DiaryList from '../components/diary/DiaryList';
+import DiaryList from '../mobileComponents/diary/DiaryList';
 
 // 날짜를 'YYYY-MM-DD' 형태로 바꾸는 함수들
 const leftPad = (value) => {
