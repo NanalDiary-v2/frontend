@@ -7,7 +7,7 @@ import MyDiary from '../webComponents/MyDiary';
 import GroupDiary from '../webComponents/GroupDiary';
 import FriendList from '../webComponents/FriendList';
 import DiaryNew from '../webComponents/DiaryNew';
-import SignUp from '../webComponents/account/SignUp';
+import SignUp from '../components/account/SignUp';
 import SignIn from '../components/account/SignIn';
 import DiaryDetail from '../webComponents/diary/DiaryDetail';
 import DiaryUpdate from '../webComponents/diary/DiaryUpdate';
