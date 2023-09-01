@@ -3,10 +3,9 @@ import Swal from 'sweetalert2';
 import axios_api from '../../config/Axios';
 import { onLogin } from '../../config/Login';
 import { BrowserView, MobileView } from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 
 function FriendAdd() {
-  const isMobileView = MobileView === true ? 1 : 0;
-
   const [friendList, setFriendList] = useState([]);
 
   const searchFriend = (e) => {
@@ -43,9 +42,9 @@ function FriendAdd() {
             Swal.fire({
               icon: 'success', // Alert 타입
               text: '친구 추가를 요청했어요!', // Alert 내용
-              width: isMobileView ? '80%' : '35%',
+              width: isMobile ? '80%' : '35%',
             }).then(function () {
-              if (isMobileView) window.location.reload(true);
+              if (isMobile) window.location.reload(true);
             });
           } else {
             console.log('친구 추가 알림 저장 오류 : ');
