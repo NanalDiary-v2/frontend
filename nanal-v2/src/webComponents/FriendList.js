@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import nmy from '../src_assets/img/bookmark-name/name-mark-yellow.svg';
 import diaryImgYellow from '../src_assets/img/diary-img/diary-img-yellow.svg';
 import FList from './friend/FriendList';
-import FriendAdd from './friend/FriendAdd';
+import FriendAdd from '../components/friend/FriendAdd';
 import FriendDetail from './friend/FriendDetail';
 
 const FriendList = () => {
