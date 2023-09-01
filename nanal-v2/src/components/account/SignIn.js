@@ -83,7 +83,6 @@ function SignIn() {
 
   const SignInWeb = (e) => {
     e.preventDefault();
-    console.log('hihihi');
     axios_api
       .post('/user/login', {
         userId: userId,
@@ -92,24 +91,30 @@ function SignIn() {
       .then(({ data }) => {
         if (data.statusCode === 200) {
           if (data.data.responseMessage === '로그인 성공') {
-            console.log('hihihi');
             onLoginSuccess('brower', data.data.token);
             onLogin();
-            console.log('hihihi');
             axios_api
               .get('user/profile')
               .then(({ data }) => {
                 if (data.statusCode === 200) {
                   if (data.data.responseMessage === '회원 정보 조회 성공') {
-                    console.log('hihihi');
                     // console.log(data.data.profile);
-                    window.localStorage.setItem('profileDays', data.data.profile.days);
-                    window.localStorage.setItem('profileImg', data.data.profile.img);
+                    window.localStorage.setItem(
+                      'profileDays',
+                      data.data.profile.days
+                    );
+                    window.localStorage.setItem(
+                      'profileImg',
+                      data.data.profile.img
+                    );
                     window.localStorage.setItem(
                       'profileIntroduction',
                       data.data.profile.introduction
                     );
-                    window.localStorage.setItem('profileNickname', data.data.profile.nickname);
+                    window.localStorage.setItem(
+                      'profileNickname',
+                      data.data.profile.nickname
+                    );
                     navigate(`/home`, {
                       replace: true,
                     });
@@ -167,7 +172,10 @@ function SignIn() {
             <h1 className='flex justify-center m-3 font-bold tracking-wider text-center'>
               SignIn to 나날🤗
             </h1>
-            <div id='sign-in-form' className='justify-between my-2 text-center 1'>
+            <div
+              id='sign-in-form'
+              className='justify-between my-2 text-center 1'
+            >
               <form action='' onSubmit={SignInMobile}>
                 <div className='m-1'>
                   <label htmlFor='user-id'>ID &nbsp;&nbsp;: </label>
@@ -215,7 +223,11 @@ function SignIn() {
                   window.open(kakaoLogin);
                 }}
               >
-                <img src={kakaoMobile} alt='카카오 로그인' className='w-full h-[45px]' />
+                <img
+                  src={kakaoMobile}
+                  alt='카카오 로그인'
+                  className='w-full h-[45px]'
+                />
               </button>
             </div>
             {/* <div className='mt-4'>
@@ -236,11 +248,19 @@ function SignIn() {
               </Link>
             </div>
             <div>
-              <h1 className='m-3 font-bold tracking-wider text-center'>SignIn to 나날🤗</h1>
-              <div id='sign-in-form' className='flex items-center justify-center ml-2'>
+              <h1 className='m-3 font-bold tracking-wider text-center'>
+                SignIn to 나날🤗
+              </h1>
+              <div
+                id='sign-in-form'
+                className='flex items-center justify-center ml-2'
+              >
                 <form onSubmit={SignInWeb}>
                   <div className='m-1'>
-                    <label htmlFor='user-id' className='font-bold cursor-pointer'>
+                    <label
+                      htmlFor='user-id'
+                      className='font-bold cursor-pointer'
+                    >
                       ID &nbsp;&nbsp;
                     </label>
                     <input
@@ -254,7 +274,10 @@ function SignIn() {
                     <br />
                   </div>
                   <div className='m-1'>
-                    <label htmlFor='user-password' className='font-bold cursor-pointer'>
+                    <label
+                      htmlFor='user-password'
+                      className='font-bold cursor-pointer'
+                    >
                       PW
                     </label>
                     <input
@@ -289,7 +312,11 @@ function SignIn() {
                         window.open(kakaoLogin);
                       }}
                     >
-                      <img src={kakaoWeb} alt='카카오 로그인' className='w-full h-[45px]' />
+                      <img
+                        src={kakaoWeb}
+                        alt='카카오 로그인'
+                        className='w-full h-[45px]'
+                      />
                     </button>
                   </div>
                 </form>
