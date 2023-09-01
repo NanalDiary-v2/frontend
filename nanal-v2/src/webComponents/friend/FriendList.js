@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios_api from '../../config/Axios';
 import { onLogin } from '../../config/Login';
-import FriendItem from './FriendItem';
+import FriendItem from '../../components/friend/FriendItem';
 import addIcon from '../../src_assets/img/user_add_icon.png';
 
 function FriendList({ setFriendAdd, setUserIdx }) {

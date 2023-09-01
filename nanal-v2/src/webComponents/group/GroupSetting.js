@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios_api from '../../config/Axios';
 import { onLogin } from '../../config/Login';
-import FriendItem from '../friend/FriendItem';
+import FriendItem from '../../components/friend/FriendItem';
 
 function GroupSetting({ groupIdx, setGroupCompo }) {
   // const { state } = useLocation();
@@ -140,13 +140,13 @@ function GroupSetting({ groupIdx, setGroupCompo }) {
           <div
             onClick={() => setGroupCompo([false, false, false, false, true])}
           >
-            <button className='bg-cyan-600 text-white px-2 py-1 rounded-3xl m-auto mx-5 inline-block'>
+            <button className='inline-block px-2 py-1 m-auto mx-5 text-white bg-cyan-600 rounded-3xl'>
               수정하기
             </button>
           </div>
           <button
             type='button'
-            className='bg-rose-600 text-white px-2 py-1 rounded-3xl m-auto mx-5 inline-block'
+            className='inline-block px-2 py-1 m-auto mx-5 text-white bg-rose-600 rounded-3xl'
             onClick={deleteGroup}
           >
             탈퇴하기
