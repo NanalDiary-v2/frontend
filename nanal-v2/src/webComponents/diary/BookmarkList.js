@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios_api from '../../config/Axios';
 import { onLogin } from '../../config/Login';
-import BookmarkItem from './BookmarkItem';
+import BookmarkItem from '../../components/diary/BookmarkItem';
 
 function BookmarkList() {
   // 좋아하는 일기 데이터 받기
