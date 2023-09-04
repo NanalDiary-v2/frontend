@@ -5,13 +5,11 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios_api from '../../config/Axios';
 import nanal from '../../src_assets/img/나날1.jpeg';
+import { isMobile } from 'react-device-detect';
 
 function SignUp() {
-  const isMobileView = MobileView === true ? 1 : 0;
-
   const navigate = useNavigate();
 
-  // 이메일 E-mail
   const [email, setEmail] = useState('');
   const [emailMessage, setEmailMessage] = useState('');
   const [isEmail, setIsEmail] = useState(false);
@@ -41,30 +39,24 @@ function SignUp() {
     axios_api
       .get(`user/validate/${emailstring}`)
       .then(({ data }) => {
-        console.log('요청');
         if (data.statusCode === 200) {
           if (data.data.responseMessage === '이메일 발송 성공') {
             setEmailV1(data.data.code);
             setEmailToggle(true);
           } else if (data.data.responseMessage === '사용 불가') {
-            // alert('이미 가입한 이메일 입니다.');
             Swal.fire({
-              icon: 'warning', // Alert 타입
-              text: '이미 가입한 이메일 입니다', // Alert 내용
-              width: isMobileView ? '60%' : '30%',
+              icon: 'warning',
+              text: '이미 가입한 이메일 입니다',
+              width: isMobile ? '60%' : '30%',
             }).then(function () {});
             window.location.replace('/SignIn');
           }
         } else {
-          // alert('이메일을 확인하고 다시 입력해주세요.');
           Swal.fire({
             icon: 'warning',
             text: '이메일을 확인하고 다시 입력해주세요',
-            width: isMobileView ? '60%' : '30%',
+            width: isMobile ? '60%' : '30%',
           }).then(function () {});
-          // console.log('이메일 인증 과정 오류: ');
-          // console.log(data.statusCode);
-          // console.log(data.data.responseMessage);
         }
       })
       .catch((error) => {
@@ -86,13 +78,12 @@ function SignUp() {
         Swal.fire({
           icon: 'warning',
           text: '이메일 인증 코드를 다시 확인해주세요!',
-          width: isMobileView ? '60%' : '30%',
+          width: isMobile ? '60%' : '30%',
         }).then(function () {});
       }
     }
   };
 
-  // 아이디 userId
   const [id, setId] = useState('');
   const [idMessage, setIdMessage] = useState('');
   const [isId, setIsId] = useState(false);
@@ -121,8 +112,6 @@ function SignUp() {
             }
           } else {
             console.log('아이디 중복 확인 오류: ');
-            console.log(data.statusCode);
-            console.log(data.data.responseMessage);
           }
         })
         .catch((error) => {
@@ -131,7 +120,6 @@ function SignUp() {
     }
   };
 
-  // 비밀번호
   const [password, setPassword] = useState('');
   const [passwordMessage, setPasswordMessage] = useState('');
   const [isPassword, setIsPassword] = useState(false);
@@ -151,7 +139,6 @@ function SignUp() {
     }
   };
 
-  // 비밀번호 확인
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [passwordConfirmMessage, setPasswordConfirmMessage] = useState('');
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
@@ -170,7 +157,6 @@ function SignUp() {
     }
   };
 
-  // 닉네임
   const [nickName, setNickName] = useState('');
   const [nickNameMessage, setNickNameMessage] = useState('');
   const [isNickName, setIsNickName] = useState(false);
@@ -198,8 +184,6 @@ function SignUp() {
             }
           } else {
             console.log('닉네임 중복 확인 오류: ');
-            console.log(data.statusCode);
-            console.log(data.data.responseMessage);
           }
         })
         .catch((error) => {
@@ -208,44 +192,38 @@ function SignUp() {
     }
   };
 
-  // 회원가입
   const SignUp = (e) => {
     e.preventDefault();
 
     if (isEmail !== true) {
-      // alert('이메일 인증을 확인해주세요.');
       Swal.fire({
         icon: 'warning',
         text: '이메일 인증을 확인해주세요.',
-        width: isMobileView ? '60%' : '30%',
+        width: isMobile ? '60%' : '30%',
       }).then(function () {});
     } else if (isId !== true) {
-      // alert('아이디를 확인해주세요.');
       Swal.fire({
         icon: 'warning',
         text: '아이디를 확인해주세요.',
-        width: isMobileView ? '60%' : '30%',
+        width: isMobile ? '60%' : '30%',
       }).then(function () {});
     } else if (isPassword !== true) {
-      // alert('비밀번호를 확인해주세요.');
       Swal.fire({
         icon: 'warning',
         text: '비밀번호를 확인해주세요.',
-        width: isMobileView ? '60%' : '30%',
+        width: isMobile ? '60%' : '30%',
       }).then(function () {});
     } else if (isPasswordConfirm !== true) {
-      // alert('비밀번호를 맞게 입력했는지 확인해주세요.');
       Swal.fire({
         icon: 'warning',
         text: '비밀번호를 맞게 입력했는지 확인해주세요.',
-        width: isMobileView ? '60%' : '30%',
+        width: isMobile ? '60%' : '30%',
       }).then(function () {});
     } else if (isNickName !== true) {
-      // alert('닉네임을 확인해주세요.');
       Swal.fire({
         icon: 'warning',
         text: '닉네임을 확인해주세요.',
-        width: isMobileView ? '60%' : '30%',
+        width: isMobile ? '60%' : '30%',
       }).then(function () {});
     } else {
       axios_api
@@ -256,27 +234,21 @@ function SignUp() {
           nickname: nickName,
         })
         .then(({ data }) => {
-          // console.log(data);
-          // console.log(data.data);
-          // console.log(data.statusCode);
-          // console.log(data.data.ResponseMessage);
           if (data.statusCode === 200) {
             if (data.data.responseMessage === '회원 가입 성공') {
-              // alert('회원 가입 성공!!!');
               Swal.fire({
                 icon: 'success',
                 text: '회원 가입 성공!!!',
-                width: isMobileView ? '60%' : '30%',
+                width: isMobile ? '60%' : '30%',
               }).then(function () {});
               navigate(`/SignIn`, {
                 replace: true,
               });
-              // window.location.replace('/SignIn');
             } else if (data.data.responseMessage === '사용 불가') {
               Swal.fire({
                 icon: 'warning',
                 text: '이미 가입된 이메일입니다!',
-                width: isMobileView ? '60%' : '30%',
+                width: isMobile ? '60%' : '30%',
               }).then(function () {
                 setEmail('');
                 setId('');
@@ -289,7 +261,7 @@ function SignUp() {
             Swal.fire({
               icon: 'warning',
               text: '입력 조건을 다시 확인해주세요',
-              width: isMobileView ? '60%' : '30%',
+              width: isMobile ? '60%' : '30%',
             }).then(function () {
               setEmail('');
               setId('');
