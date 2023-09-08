@@ -2,8 +2,8 @@ import { useState } from 'react';
 import nmb from '../src_assets/img/bookmark-name/name-mark-blue.svg';
 import diaryImgBlue from '../src_assets/img/diary-img/diary-img-blue.svg';
 import DiaryList from './diary/DiaryList';
-import BookmarkList from './diary/BookmarkList';
 import TrashCan from './another/TrashCan';
+import BookmarkList from '../components/diary/BookmarkList';
 
 function Etc() {
   const [etcCompo, setEtcCompo] = useState([true, false, false, false]);
@@ -11,11 +11,7 @@ function Etc() {
   return (
     <div className='absolute w-[1440px] mx-auto'>
       <img src={nmb} alt='bg' className='absolute z-20 left-60 inset-y-28' />
-      <img
-        src={diaryImgBlue}
-        alt='bg'
-        className='absolute w-[1280px] z-10 left-12 top-8'
-      />
+      <img src={diaryImgBlue} alt='bg' className='absolute w-[1280px] z-10 left-12 top-8' />
       <div className='absolute z-20 left-72 inset-y-[216px]'>
         <div className='flex flex-col content-center'>
           <button
