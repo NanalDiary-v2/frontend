@@ -10,7 +10,7 @@ import DiaryNew from '../webComponents/DiaryNew';
 import SignUp from '../components/account/SignUp';
 import SignIn from '../components/account/SignIn';
 import DiaryDetail from '../components/diary/DiaryDetail';
-import DiaryUpdate from '../webComponents/diary/DiaryUpdate';
+import DiaryUpdate from '../components/diary/DiaryUpdate';
 import KaKaoLogin from '../components/account/KaKaoLogin';
 import NotFound from '../webComponents/another/NotFound';
 import bmkRR from '../src_assets/img/bookmark/bookmark-red-red.svg';
