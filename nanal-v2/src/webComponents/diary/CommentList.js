@@ -3,7 +3,7 @@ import jwt_decode from 'jwt-decode';
 import axios_api from '../../config/Axios';
 import { getCookie } from '../../config/Cookie';
 import { onLogin } from '../../config/Login';
-import CommentDetail from './CommentDetail';
+import CommentDetail from '../../components/diary/CommentDetail';
 
 function CommentList({ diaryIdx, isToggle, groupIdx }) {
   const token = getCookie('accessToken');
@@ -82,10 +82,7 @@ function CommentList({ diaryIdx, isToggle, groupIdx }) {
       .then(({ data }) => {
         if (data.statusCode === 200) {
           setCommentList(null);
-          if (
-            data.data.responseMessage ===
-            '일기 그룹에 해당하는 댓글 리스트 조회 성공'
-          ) {
+          if (data.data.responseMessage === '일기 그룹에 해당하는 댓글 리스트 조회 성공') {
             setCommentList(data.data.diaryComment);
           }
         } else {
