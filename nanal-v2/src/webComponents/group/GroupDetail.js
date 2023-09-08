@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios_api from '../../config/Axios';
 import { onLogin } from '../../config/Login';
-import DiaryList from '../diary/DiaryList';
+import DiaryList from '../../components/diary/DiaryList';
 import settingIcon from '../../src_assets/img/setting_icon.png';
 
 function GroupDetail({ groupIdx, setGroupCompo }) {
