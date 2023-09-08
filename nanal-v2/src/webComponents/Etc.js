@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import nmb from '../src_assets/img/bookmark-name/name-mark-blue.svg';
 import diaryImgBlue from '../src_assets/img/diary-img/diary-img-blue.svg';
-import DiaryList from './diary/DiaryList';
+import DiaryList from '../components/diary/DiaryList';
 import TrashCan from './another/TrashCan';
 import BookmarkList from '../components/diary/BookmarkList';
 
