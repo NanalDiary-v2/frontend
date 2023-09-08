@@ -99,22 +99,13 @@ function SignIn() {
                 if (data.statusCode === 200) {
                   if (data.data.responseMessage === '회원 정보 조회 성공') {
                     // console.log(data.data.profile);
-                    window.localStorage.setItem(
-                      'profileDays',
-                      data.data.profile.days
-                    );
-                    window.localStorage.setItem(
-                      'profileImg',
-                      data.data.profile.img
-                    );
+                    window.localStorage.setItem('profileDays', data.data.profile.days);
+                    window.localStorage.setItem('profileImg', data.data.profile.img);
                     window.localStorage.setItem(
                       'profileIntroduction',
                       data.data.profile.introduction
                     );
-                    window.localStorage.setItem(
-                      'profileNickname',
-                      data.data.profile.nickname
-                    );
+                    window.localStorage.setItem('profileNickname', data.data.profile.nickname);
                     navigate(`/home`, {
                       replace: true,
                     });
@@ -142,7 +133,6 @@ function SignIn() {
               setPw('');
             });
           } else if (data.data.responseMessage === '회원을 찾을 수 없음') {
-            // alert('회원이 아닙니다. 회원 가입을 해주세요.');
             Swal.fire({
               icon: 'warning',
               text: '회원이 아닙니다. 회원 가입을 해주세요.',
@@ -153,13 +143,11 @@ function SignIn() {
             });
           }
         } else {
-          console.log('로그인 오류: ');
-          console.log(data.statusCode);
-          console.log(data.data.responseMessage);
+          console.log('로그인 오류 : ' + data.data.responseMessage);
         }
       })
       .catch(({ error }) => {
-        console.log('로그인 오류: ' + error);
+        console.log('로그인 오류 : ' + error);
       });
   };
 
@@ -172,10 +160,7 @@ function SignIn() {
             <h1 className='flex justify-center m-3 font-bold tracking-wider text-center'>
               SignIn to 나날🤗
             </h1>
-            <div
-              id='sign-in-form'
-              className='justify-between my-2 text-center 1'
-            >
+            <div id='sign-in-form' className='justify-between my-2 text-center 1'>
               <form action='' onSubmit={SignInMobile}>
                 <div className='m-1'>
                   <label htmlFor='user-id'>ID &nbsp;&nbsp;: </label>
@@ -223,11 +208,7 @@ function SignIn() {
                   window.open(kakaoLogin);
                 }}
               >
-                <img
-                  src={kakaoMobile}
-                  alt='카카오 로그인'
-                  className='w-full h-[45px]'
-                />
+                <img src={kakaoMobile} alt='카카오 로그인' className='w-full h-[45px]' />
               </button>
             </div>
             {/* <div className='mt-4'>
@@ -248,19 +229,11 @@ function SignIn() {
               </Link>
             </div>
             <div>
-              <h1 className='m-3 font-bold tracking-wider text-center'>
-                SignIn to 나날🤗
-              </h1>
-              <div
-                id='sign-in-form'
-                className='flex items-center justify-center ml-2'
-              >
+              <h1 className='m-3 font-bold tracking-wider text-center'>SignIn to 나날🤗</h1>
+              <div id='sign-in-form' className='flex items-center justify-center ml-2'>
                 <form onSubmit={SignInWeb}>
                   <div className='m-1'>
-                    <label
-                      htmlFor='user-id'
-                      className='font-bold cursor-pointer'
-                    >
+                    <label htmlFor='user-id' className='font-bold cursor-pointer'>
                       ID &nbsp;&nbsp;
                     </label>
                     <input
@@ -274,10 +247,7 @@ function SignIn() {
                     <br />
                   </div>
                   <div className='m-1'>
-                    <label
-                      htmlFor='user-password'
-                      className='font-bold cursor-pointer'
-                    >
+                    <label htmlFor='user-password' className='font-bold cursor-pointer'>
                       PW
                     </label>
                     <input
@@ -312,11 +282,7 @@ function SignIn() {
                         window.open(kakaoLogin);
                       }}
                     >
-                      <img
-                        src={kakaoWeb}
-                        alt='카카오 로그인'
-                        className='w-full h-[45px]'
-                      />
+                      <img src={kakaoWeb} alt='카카오 로그인' className='w-full h-[45px]' />
                     </button>
                   </div>
                 </form>
