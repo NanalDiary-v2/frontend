@@ -4,6 +4,7 @@ import axios_api from '../../config/Axios';
 import { getCookie } from '../../config/Cookie';
 import { onLogin } from '../../config/Login';
 import CommentDetail from './CommentDetail';
+import { BrowserView, MobileView } from 'react-device-detect';
 
 function CommentList({ diaryIdx, isToggle, groupIdx }) {
   const token = getCookie('accessToken');
@@ -11,7 +12,6 @@ function CommentList({ diaryIdx, isToggle, groupIdx }) {
 
   // 댓글 내용
   const [content, setContent] = useState('');
-  // const onChange = (e) => setContent(e.target.value);
   // 포커싱 기능
   const commentRef = useRef();
   // 댓글 리스트 데이터 받기
@@ -47,8 +47,6 @@ function CommentList({ diaryIdx, isToggle, groupIdx }) {
                   }
                 } else {
                   console.log('새 댓글 알림 저장 실패 : ');
-                  console.log(data.statusCode);
-                  console.log(data.data.responseMessage);
                 }
               })
               .catch(({ error }) => {
@@ -57,8 +55,6 @@ function CommentList({ diaryIdx, isToggle, groupIdx }) {
           }
         } else {
           console.log('일기 댓글 저장 오류: ');
-          console.log(data.statusCode);
-          console.log(data.data.responseMessage);
         }
       })
       .catch(({ error }) => {
@@ -82,16 +78,11 @@ function CommentList({ diaryIdx, isToggle, groupIdx }) {
       .then(({ data }) => {
         if (data.statusCode === 200) {
           setCommentList(null);
-          if (
-            data.data.responseMessage ===
-            '일기 그룹에 해당하는 댓글 리스트 조회 성공'
-          ) {
+          if (data.data.responseMessage === '일기 그룹에 해당하는 댓글 리스트 조회 성공') {
             setCommentList(data.data.diaryComment);
           }
         } else {
           console.log('일기 그룹에 해당하는 댓글 리스트 불러오기 오류: ');
-          console.log(data.statusCode);
-          console.log(data.data.responseMessage);
         }
       })
       .catch(({ error }) => {
@@ -100,34 +91,71 @@ function CommentList({ diaryIdx, isToggle, groupIdx }) {
   }, []);
 
   return (
-    <div>
-      <hr className='my-2 border-dashed border-slate-400/75 w-65' />
-      {isToggle === 2 || isToggle === 3 ? (
-        <form className='flex justify-end mx-auto my-3' onSubmit={handleSubmit}>
-          <input
-            type='text'
-            ref={commentRef}
-            placeholder='댓글을 입력하세요'
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className='p-1 px-1.5 rounded-md w-4/5'
-          />
-          <button
-            type='submit'
-            className='hover:bg-sky-700 bg-cyan-600 text-white px-2.5 py-1 ml-3  rounded-3xl'
-          >
-            등록
-          </button>
-        </form>
-      ) : (
-        <></>
-      )}
-      <div className='comments-body'>
-        {commentList.map((comment, idx) => (
-          <CommentDetail key={idx} item={comment} userIdx={userIdx} />
-        ))}
-      </div>
-    </div>
+    <>
+      <MobileView>
+        <div>
+          <hr className='my-2 border-dashed border-slate-400/75 w-65' />
+          {isToggle === 2 || isToggle === 3 ? (
+            <form className='flex justify-end mx-auto my-3' onSubmit={handleSubmit}>
+              <input
+                type='text'
+                ref={commentRef}
+                placeholder='댓글을 입력하세요'
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                className='p-1 px-1.5 rounded-md w-4/5'
+              />
+              <button
+                type='submit'
+                className='hover:bg-sky-700 bg-cyan-600 text-white px-2.5 py-1 ml-3  rounded-3xl'
+              >
+                등록
+              </button>
+            </form>
+          ) : (
+            <></>
+          )}
+          <div className='comments-body'>
+            {commentList.map((comment, idx) => (
+              <CommentDetail key={idx} item={comment} userIdx={userIdx} />
+            ))}
+          </div>
+        </div>
+      </MobileView>
+
+      <BrowserView>
+        <div className='absolute z-20 inset-y-[400px] w-[720px] right-44'>
+          <hr className='my-2 border-dashed border-slate-400/75 w-65' />
+          {isToggle === 2 || isToggle === 3 ? (
+            <form className='flex justify-end mx-auto my-3' onSubmit={handleSubmit}>
+              <input
+                type='text'
+                ref={commentRef}
+                placeholder='댓글을 입력하세요'
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                className='p-1 px-1.5 rounded-md w-4/5'
+              />
+              <button
+                type='submit'
+                className='hover:bg-sky-700 bg-cyan-600 text-white px-2.5 py-1 ml-3  rounded-3xl'
+              >
+                등록
+              </button>
+            </form>
+          ) : (
+            <></>
+          )}
+          <div className='comments-body'>
+            <div className='h-40 overflow-auto'>
+              {commentList.map((comment, idx) => (
+                <CommentDetail key={idx} item={comment} userIdx={userIdx} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </BrowserView>
+    </>
   );
 }
 

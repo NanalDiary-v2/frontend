@@ -5,7 +5,7 @@ import axios_api from '../../config/Axios';
 import jwt_decode from 'jwt-decode';
 import { getCookie } from '../../config/Cookie';
 import { onLogin } from '../../config/Login';
-import CommentList from './CommentList';
+import CommentList from '../../components/diary/CommentList';
 import bookmark from '../../src_assets/img/bookmark.png';
 import bookmark_filled from '../../src_assets/img/bookmark_fill.png';
 import diaryImgRed from '../../src_assets/img/diary-img/diary-img-red.svg';
@@ -121,11 +121,7 @@ function DiaryDetail() {
 
   return (
     <div className='relative w-[1440px] mx-auto'>
-      <img
-        src={diaryImgRed}
-        alt='bg-img'
-        className='absolute w-[1280px] z-10 left-12'
-      />
+      <img src={diaryImgRed} alt='bg-img' className='absolute w-[1280px] z-10 left-12' />
       {/* 날짜 & 북마크 */}
       <div>
         <p className='absolute z-20 inline-block text-2xl font-bold inset-y-20 right-48'>
@@ -216,11 +212,7 @@ function DiaryDetail() {
       </div>
       {/* 댓글 내용 */}
       <div className='my-5'>
-        <CommentList
-          diaryIdx={diaryIdx}
-          isToggle={isToggle}
-          groupIdx={groupIdx}
-        />
+        <CommentList diaryIdx={diaryIdx} isToggle={isToggle} groupIdx={groupIdx} />
       </div>
     </div>
   );
