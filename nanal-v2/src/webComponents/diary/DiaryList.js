@@ -2,16 +2,9 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios_api from '../../config/Axios';
 import { onLogin } from '../../config/Login';
-import DiaryItem from './DiaryItem';
+import DiaryItem from '../../components/diary/DiaryItem';
 
-function DiaryList({
-  isToggle,
-  curDate,
-  groupIdx,
-  diarydate,
-  changeHomeStateThree,
-  setToday,
-}) {
+function DiaryList({ isToggle, curDate, groupIdx, diarydate, changeHomeStateThree, setToday }) {
   const { state } = useLocation();
   const today = curDate;
 
@@ -19,11 +12,7 @@ function DiaryList({
     isToggle = state.isToggle;
   }
 
-  const arrAxios = [
-    `diary/list/date/${curDate}`,
-    `diary/list/user`,
-    `diary/list/${groupIdx}`,
-  ];
+  const arrAxios = [`diary/list/date/${curDate}`, `diary/list/user`, `diary/list/${groupIdx}`];
 
   // 일기 데이터 받기
   const [diaryList, setDiaryList] = useState([]);
@@ -62,14 +51,11 @@ function DiaryList({
     <div>
       {isToggle === 0 ? (
         isShow === true ? (
-          <p className='text-2xl font-bold text-center'>
-            {diaryList.length}개의 일기가 있습니다.
-          </p>
+          <p className='text-2xl font-bold text-center'>{diaryList.length}개의 일기가 있습니다.</p>
         ) : (
           <div className='text-center'>
             <p className='mt-40 text-2xl font-bold'>
-              {diarydate[0]}년 {diarydate[1]}월 {diarydate[2]}일의 일기는
-              없습니다.
+              {diarydate[0]}년 {diarydate[1]}월 {diarydate[2]}일의 일기는 없습니다.
             </p>
 
             <div
@@ -95,12 +81,7 @@ function DiaryList({
       <div className='my-2'>
         <div className='overflow-y-auto h-96'>
           {diaryList.map((diary) => (
-            <DiaryItem
-              key={diary.diaryIdx}
-              isToggle={isToggle}
-              groupIdx={groupIdx}
-              {...diary}
-            />
+            <DiaryItem key={diary.diaryIdx} isToggle={isToggle} groupIdx={groupIdx} {...diary} />
           ))}
         </div>
       </div>
