@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import bell from '../src_assets/img/bell.svg';
 import logo from '../src_assets/img/nanalLogo.svg';
 import Tuning from '../webComponents/setting/Tuning';
-import AlarmList from '../webComponents/another/AlarmList';
+import AlarmList from '../components/another/AlarmList';
 // import { Link } from 'react-router-dom';
 import { onLogin } from '../config/Login';
 import axios_api from '../config/Axios';
@@ -10,7 +10,6 @@ import axios_api from '../config/Axios';
 function Nav({ setHomeState }) {
   // Logo 누르면 캘린더페이지 보여주게 해줄 녀석.
 
-  const [useAlarm, setUseAlarm] = useState(true);
   const userProfile = {
     days: window.localStorage.getItem('profileDays'),
     img: window.localStorage.getItem('profileImg'),
@@ -104,12 +103,6 @@ function Nav({ setHomeState }) {
             className='relative cursor-pointer'
           >
             <img src={bell} className='w-6 h-6 my-3' alt='bell' />
-            {/* {useAlarm === true ? (
-              <span className='absolute flex w-3 h-3 -right-2 top-2'>
-                <span className='absolute inline-flex w-3 h-3 rounded-full opacity-75 animate-ping bg-sky-400'></span>
-                <span className='relative inline-flex w-3 h-3 rounded-full bg-sky-500'></span>
-              </span>
-            ) : null} */}
             {checkAlarm === true ? (
               <span className='absolute flex w-3 h-3 -right-2 top-2'>
                 <span className='absolute inline-flex w-2 h-2 rounded-full opacity-75 animate-ping bg-sky-300'></span>
@@ -122,10 +115,7 @@ function Nav({ setHomeState }) {
               ref={alarmRef}
               className='absolute right-40 inset-y-[48px] rounded-md box-border border border-black w-80 h-[500px] z-40 bg-slate-100 grid grid-cols-1 justify-items-center overflow-auto'
             >
-              <AlarmList
-                setUseAlarm={setUseAlarm}
-                toggleAlarmMenu={toggleAlarmMenu}
-              />
+              <AlarmList toggleAlarmMenu={toggleAlarmMenu} />
             </div>
           )}
 

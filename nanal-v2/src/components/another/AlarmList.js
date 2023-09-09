@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios_api from '../../config/Axios';
 import { onLogin } from '../../config/Login';
 import AlarmItem from './AlarmItem';
+import { BrowserView, MobileView } from 'react-device-detect';
 
-function AlarmList() {
+function AlarmList({ toggleAlarmMenu }) {
   const [isAlarmList, setIsAlarmList] = useState([]);
 
   // DB에서 알람 리스트 다 땡겨와야함.
@@ -35,19 +36,47 @@ function AlarmList() {
 
   //알람은 최근 30일 것까지만...
   return (
-    <div className='grid justify-center grid-cols-1 text-center'>
-      <p className='m-auto text-xl font-bold text-center'>알람 목록 🔔</p>
-      {isAlarmList.length === 0 ? (
-        <div className='my-4 text-lg'>
-          <p>도착한 알림이 없어요!</p>
+    <div>
+      <MobileView>
+        <div className='grid justify-center grid-cols-1 text-center'>
+          <p className='m-auto text-xl font-bold text-center'>알람 목록 🔔</p>
+          {isAlarmList.length === 0 ? (
+            <div className='my-4 text-lg'>
+              <p>도착한 알림이 없어요!</p>
+            </div>
+          ) : (
+            <div className=''>
+              {isAlarmList.map((ar) => (
+                <AlarmItem key={ar.noticeIdx} {...ar} />
+              ))}
+            </div>
+          )}
         </div>
-      ) : (
-        <div className=''>
-          {isAlarmList.map((ar) => (
-            <AlarmItem key={ar.noticeIdx} {...ar} />
-          ))}
+      </MobileView>
+      <BrowserView>
+        <div className='w-full text-center'>
+          <p className='mx-auto my-5 text-xl font-bold text-center'>
+            알람 목록 🔔
+          </p>
+          <div className='grid justify-center grid-cols-1'>
+            {isAlarmList.length === 0 ? (
+              <div className='my-4 text-lg'>
+                <p>도착한 알림이 없어요!</p>
+              </div>
+            ) : (
+              <div className='mx-1'>
+                {isAlarmList.map((ar) => (
+                  <AlarmItem
+                    key={ar.noticeIdx}
+                    toggleAlarmMenu={toggleAlarmMenu}
+                    {...ar}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      )}
+      </BrowserView>
     </div>
   );
 }

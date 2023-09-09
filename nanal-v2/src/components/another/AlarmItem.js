@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios_api from '../../config/Axios';
+import { isMobile } from 'react-device-detect';
 
 // 친구 등록 = friend
 // 그룹 초대 = group/join
@@ -9,6 +10,7 @@ import axios_api from '../../config/Axios';
 // 새 댓글 알림 = 해달 글로 이동
 
 function AlarmItem({
+  toggleAlarmMenu,
   content,
   noticeType,
   requestDiaryIdx,
@@ -29,20 +31,12 @@ function AlarmItem({
         if (data.statusCode === 200) {
           if (data.data.responseMessage === '친구 등록 성공') {
             checkAlarm(0);
-            // Swal.fire({
-            //   icon: 'success', // Alert 타입
-            //   text: '친구 등록에 수락했어요!', // Alert 내용
-            //   width: '65%',
-            // }).then(function () {
-            //   window.location.reload(true);
-            // });
-            // navigate(`/Friend/List`);
           } else if (data.data.responseMessage === '이미 친구로 등록됨') {
             checkAlarm();
             Swal.fire({
               icon: 'info', // Alert 타입
               text: '이미 친구에요!', // Alert 내용
-              width: '65%',
+              width: isMobile ? '65%' : '35%',
             }).then(function () {
               window.location.reload(true);
             });
@@ -68,20 +62,13 @@ function AlarmItem({
         if (data.statusCode === 200) {
           if (data.data.responseMessage === '그룹 가입 성공') {
             checkAlarm(1);
-            // Swal.fire({
-            //   icon: 'success', // Alert 타입
-            //   text: '그룹 가입에 수락했어요!', // Alert 내용
-            //   width: '65%',
-            // }).then(function () {
-            //   window.location.reload(true);
-            // });
-            // navigate(`/Group/List`);
           } else if (data.data.responseMessage === '이미 가입한 그룹') {
             checkAlarm();
             Swal.fire({
+              title: isMobile ? '' : '!!!',
               icon: 'info', // Alert 타입
               text: '이미 처리된 사항이에요!', // Alert 내용
-              width: '65%',
+              width: isMobile ? '65%' : '35%',
             }).then(function () {
               //window.location.reload(true);
             });
@@ -106,17 +93,19 @@ function AlarmItem({
           if (data.data.responseMessage === '알림 조회 성공') {
             if (index === 0) {
               Swal.fire({
+                title: isMobile ? '' : '친구 등록',
                 icon: 'success', // Alert 타입
                 text: '친구 등록에 수락했어요!', // Alert 내용
-                width: '80%',
+                width: isMobile ? '80%' : '35%',
               }).then(function () {
                 window.location.reload(true);
               });
             } else if (index === 1) {
               Swal.fire({
+                title: isMobile ? '' : '그룹 가입',
                 icon: 'success', // Alert 타입
                 text: '그룹 가입에 수락했어요!', // Alert 내용
-                width: '80%',
+                width: isMobile ? '80%' : '35%',
               }).then(function () {
                 window.location.reload(true);
               });
@@ -142,6 +131,7 @@ function AlarmItem({
       .then(({ data }) => {
         if (data.statusCode === 200) {
           if (data.data.responseMessage === '알림 조회 성공') {
+            toggleAlarmMenu();
             navigate('/Diary/Detail', {
               state: {
                 diaryIdx: requestDiaryIdx,
