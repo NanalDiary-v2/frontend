@@ -2,7 +2,7 @@ import { useState } from 'react';
 import nmb from '../src_assets/img/bookmark-name/name-mark-blue.svg';
 import diaryImgBlue from '../src_assets/img/diary-img/diary-img-blue.svg';
 import DiaryList from '../components/diary/DiaryList';
-import TrashCan from './another/TrashCan';
+import TrashCan from '../components/another/TrashCan';
 import BookmarkList from '../components/diary/BookmarkList';
 
 function Etc() {
@@ -11,23 +11,27 @@ function Etc() {
   return (
     <div className='absolute w-[1440px] mx-auto'>
       <img src={nmb} alt='bg' className='absolute z-20 left-60 inset-y-28' />
-      <img src={diaryImgBlue} alt='bg' className='absolute w-[1280px] z-10 left-12 top-8' />
+      <img
+        src={diaryImgBlue}
+        alt='bg'
+        className='absolute w-[1280px] z-10 left-12 top-8'
+      />
       <div className='absolute z-20 left-72 inset-y-[216px]'>
         <div className='flex flex-col content-center'>
           <button
-            className='mt-5 p-2 text-lg font-bold text-center rounded-lg cursor-pointer right-20 bg-violet-100 hover:bg-blue-400 whitespace-nowrap'
+            className='p-2 mt-5 text-lg font-bold text-center rounded-lg cursor-pointer right-20 bg-violet-100 hover:bg-blue-400 whitespace-nowrap'
             onClick={() => setEtcCompo([false, true, false, false])}
           >
             전체 일기
           </button>
           <button
-            className='mt-2 p-2 text-lg font-bold text-center rounded-lg cursor-pointer right-20 bg-violet-100 hover:bg-blue-400 whitespace-nowrap'
+            className='p-2 mt-2 text-lg font-bold text-center rounded-lg cursor-pointer right-20 bg-violet-100 hover:bg-blue-400 whitespace-nowrap'
             onClick={() => setEtcCompo([false, false, true, false])}
           >
             북마크
           </button>
           <button
-            className='mt-2 p-2 text-lg font-bold text-center rounded-lg cursor-pointer right-20 bg-violet-100 hover:bg-blue-400 whitespace-nowrap'
+            className='p-2 mt-2 text-lg font-bold text-center rounded-lg cursor-pointer right-20 bg-violet-100 hover:bg-blue-400 whitespace-nowrap'
             onClick={() => setEtcCompo([false, false, false, true])}
           >
             휴지통
