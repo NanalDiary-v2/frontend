@@ -5,7 +5,7 @@ import GroupList from '../components/group/GroupList';
 import GroupCreate from '../components/group/GroupCreate';
 import GroupDetail from '../components/group/GroupDetail';
 import GroupSetting from '../components/group/GroupSetting';
-import GroupUpdate from './group/GroupUpdate';
+import GroupUpdate from '../components/group/GroupUpdate';
 
 const GroupDiary = () => {
   const [groupCompo, setGroupCompo] = useState([true, false, false, false, false]);
