@@ -11,11 +11,7 @@ function Etc() {
   return (
     <div className='absolute w-[1440px] mx-auto'>
       <img src={nmb} alt='bg' className='absolute z-20 left-60 inset-y-28' />
-      <img
-        src={diaryImgBlue}
-        alt='bg'
-        className='absolute w-[1280px] z-10 left-12 top-8'
-      />
+      <img src={diaryImgBlue} alt='bg' className='absolute w-[1280px] z-10 left-12 top-8' />
       <div className='absolute z-20 left-72 inset-y-[216px]'>
         <div className='flex flex-col content-center'>
           <button
@@ -36,9 +32,6 @@ function Etc() {
           >
             휴지통
           </button>
-        </div>
-        <div className='absolute z-20 right-40 inset-y-28 w-[600px]'>
-          <DiaryList setEtcCompo={setEtcCompo} />
         </div>
       </div>
       {etcCompo[0] === true ? (

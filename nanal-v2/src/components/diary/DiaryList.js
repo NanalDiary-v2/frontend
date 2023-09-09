@@ -43,7 +43,7 @@ function DiaryList({ isToggle, curDate, groupIdx, diarydate, changeHomeStateThre
       .catch(({ error }) => {
         console.log('일기 리스트 불러오기 오류: ', error);
       });
-  }, [groupIdx]);
+  }, [isToggle]);
 
   return (
     <>
