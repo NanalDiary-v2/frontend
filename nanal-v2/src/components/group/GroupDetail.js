@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import axios_api from '../../config/Axios';
 import { onLogin } from '../../config/Login';
 import DiaryList from '../diary/DiaryList';
+import { BrowserView, MobileView } from 'react-device-detect';
 import settingIcon from '../../src_assets/img/setting_icon.png';
 import ballpenIcon from '../../src_assets/img/ballpen_icon.png';
 
-function GroupDetail() {
+function GroupDetail({ groupIdx, setGroupCompo }) {
   const { state } = useLocation();
   const navigate = useNavigate();
 
@@ -53,48 +54,77 @@ function GroupDetail() {
   };
 
   return (
-    <div className='text-center'>
-      <Link
-        to={`/Group/Setting`}
-        state={{ groupIdx: groupDetail.groupIdx }}
-        className='inline-block float-right'
-      >
-        <img src={settingIcon} className='w-[20px] h-[20px] mx-1.5' />
-      </Link>
-      <div>
-        <p className='mb-1 text-2xl font-bold text-center'>
-          {groupDetail.groupName}
-        </p>
+    <>
+      <MobileView>
+        <div className='text-center'>
+          <Link
+            to={`/Group/Setting`}
+            state={{ groupIdx: groupDetail.groupIdx }}
+            className='inline-block float-right'
+          >
+            <img src={settingIcon} className='w-[20px] h-[20px] mx-1.5' />
+          </Link>
+          <div>
+            <p className='mb-1 text-2xl font-bold text-center'>{groupDetail.groupName}</p>
 
-        {groupTag.map((tagging, idx) => {
-          if (tagging.tag)
-            return (
-              <span
-                key={idx}
-                className='inline-block p-1 mx-1 my-1 text-xs break-all rounded-lg bg-stone-200 hover:bg-blue-200'
-              >
-                #{tagging.tag}&nbsp;
-              </span>
-            );
-        })}
-      </div>
-      {/* 일기쓰러가기 버튼 */}
-      <img
-        src={ballpenIcon}
-        onClick={() =>
-          navigate('/Diary/Create', {
-            state: {
-              groupIdx: state.groupIdx,
-              curDate: toStringByFormatting(new Date()),
-            },
-          })
-        }
-        className='fixed z-50 flex w-10 p-1 cursor-pointer bottom-10 right-10'
-      ></img>
-      <hr className='mx-auto mt-5 border-dashed w-80 border-1 border-slate-400' />
-      {/* 일기 리스트 */}
-      <DiaryList isToggle={state.isToggle} groupIdx={state.groupIdx} />
-    </div>
+            {groupTag.map((tagging, idx) => {
+              if (tagging.tag)
+                return (
+                  <span
+                    key={idx}
+                    className='inline-block p-1 mx-1 my-1 text-xs break-all rounded-lg bg-stone-200 hover:bg-blue-200'
+                  >
+                    #{tagging.tag}&nbsp;
+                  </span>
+                );
+            })}
+          </div>
+          {/* 일기쓰러가기 버튼 */}
+          <img
+            src={ballpenIcon}
+            onClick={() =>
+              navigate('/Diary/Create', {
+                state: {
+                  groupIdx: state.groupIdx,
+                  curDate: toStringByFormatting(new Date()),
+                },
+              })
+            }
+            className='fixed z-50 flex w-10 p-1 cursor-pointer bottom-10 right-10'
+          ></img>
+          <hr className='mx-auto mt-5 border-dashed w-80 border-1 border-slate-400' />
+          {/* 일기 리스트 */}
+          <DiaryList isToggle={state.isToggle} groupIdx={state.groupIdx} />
+        </div>
+      </MobileView>
+
+      <BrowserView>
+        <div className='absolute z-20 w-[720px] inset-y-20 -top-20 -left-40'>
+          <div
+            onClick={() => {
+              setGroupCompo([false, false, false, true, false]);
+            }}
+          >
+            <img src={settingIcon} className='w-[20px] h-[20px] mx-1.5' />
+          </div>
+          <div className='text-center'>
+            <p className='mx-1 text-2xl font-bold'>{groupDetail.groupName}</p>
+            {groupTag.map((tagging, idx) => {
+              return (
+                <span
+                  key={idx}
+                  className='inline-block p-1 mx-1 my-1 text-xs break-all rounded-lg bg-stone-200 hover:bg-blue-200'
+                >
+                  #{tagging.tag}&nbsp;
+                </span>
+              );
+            })}
+          </div>
+          {/* 일기 리스트 */}
+          <DiaryList groupIdx={groupIdx} isToggle={2} />
+        </div>
+      </BrowserView>
+    </>
   );
 }
 
