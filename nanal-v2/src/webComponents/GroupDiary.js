@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import GroupList from '../components/group/GroupList';
 import GroupCreate from '../components/group/GroupCreate';
 import GroupDetail from '../components/group/GroupDetail';
-import GroupSetting from './group/GroupSetting';
+import GroupSetting from '../components/group/GroupSetting';
 import GroupUpdate from './group/GroupUpdate';
 
 const GroupDiary = () => {
