@@ -12,7 +12,7 @@ import SignIn from '../components/account/SignIn';
 import DiaryDetail from '../components/diary/DiaryDetail';
 import DiaryUpdate from '../components/diary/DiaryUpdate';
 import KaKaoLogin from '../components/account/KaKaoLogin';
-import NotFound from '../webComponents/another/NotFound';
+import NotFound from '../components/another/NotFound';
 import bmkRR from '../src_assets/img/bookmark/bookmark-red-red.svg';
 import bmkRW from '../src_assets/img/bookmark/bookmark-red-white.svg';
 import bmkOO from '../src_assets/img/bookmark/bookmark-orange-orange.svg';
@@ -58,7 +58,12 @@ const AppMain = ({ homeState, setHomeState }) => {
         {homeState[0] === true ? (
           <Route
             path='/home'
-            element={<MyDiary changeHomeStateThree={changeHomeStateThree} setToday={setToday} />}
+            element={
+              <MyDiary
+                changeHomeStateThree={changeHomeStateThree}
+                setToday={setToday}
+              />
+            }
           ></Route>
         ) : homeState[1] === true ? (
           <Route path='/home' element={<GroupDiary />}></Route>
@@ -67,7 +72,12 @@ const AppMain = ({ homeState, setHomeState }) => {
         ) : homeState[3] === true ? (
           <Route
             path='/home'
-            element={<DiaryNew today={today} changeHomeStateZero={changeHomeStateZero} />}
+            element={
+              <DiaryNew
+                today={today}
+                changeHomeStateZero={changeHomeStateZero}
+              />
+            }
           ></Route>
         ) : homeState[4] === true ? (
           <Route path='/home' element={<Etc />}></Route>
@@ -96,24 +106,42 @@ const AppMain = ({ homeState, setHomeState }) => {
             </Link>
           )}
           {homeState[2] === true ? (
-            <img src={bmkYY} className='absolute z-0 right-[60px] top-[272px]' />
+            <img
+              src={bmkYY}
+              className='absolute z-0 right-[60px] top-[272px]'
+            />
           ) : (
             <Link to='/home' onClick={changeHomeStateTwo}>
-              <img src={bmkYW} className='absolute z-0 right-[60px] top-[272px]' />
+              <img
+                src={bmkYW}
+                className='absolute z-0 right-[60px] top-[272px]'
+              />
             </Link>
           )}
           {homeState[3] === true ? (
-            <img src={bmkGG} className='absolute z-0 right-[60px] top-[352px]' />
+            <img
+              src={bmkGG}
+              className='absolute z-0 right-[60px] top-[352px]'
+            />
           ) : (
             <Link to='/home' onClick={changeHomeStateThree}>
-              <img src={bmkGW} className='absolute z-0 right-[60px] top-[352px]' />
+              <img
+                src={bmkGW}
+                className='absolute z-0 right-[60px] top-[352px]'
+              />
             </Link>
           )}
           {homeState[4] === true ? (
-            <img src={bmkBB} className='absolute z-0 right-[60px] top-[432px]' />
+            <img
+              src={bmkBB}
+              className='absolute z-0 right-[60px] top-[432px]'
+            />
           ) : (
             <Link to='/home' onClick={changeHomeStateFour}>
-              <img src={bmkBW} className='absolute z-0 right-[60px] top-[432px]' />
+              <img
+                src={bmkBW}
+                className='absolute z-0 right-[60px] top-[432px]'
+              />
             </Link>
           )}
         </div>

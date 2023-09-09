@@ -42,7 +42,7 @@ function Settings() {
           <img src={groupYellow} className='m-auto' />
           <p className='my-1 text-center'>친구 목록</p>
         </Link>
-        <Link to='/RecycleBin' className='grid content-evenly'>
+        <Link to='/TrashCan' className='grid content-evenly'>
           <img src={recycleBinImg} className='m-auto' />
           <p className='my-1 text-center'>휴지통</p>
         </Link>
