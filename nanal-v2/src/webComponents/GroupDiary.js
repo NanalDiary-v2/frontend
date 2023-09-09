@@ -1,7 +1,7 @@
 import nmo from '../src_assets/img/bookmark-name/name-mark-orange.svg';
 import diaryImgOrange from '../src_assets/img/diary-img/diary-img-orange.svg';
 import React, { useState } from 'react';
-import GroupList from './group/GroupList';
+import GroupList from '../components/group/GroupList';
 import GroupCreate from '../components/group/GroupCreate';
 import GroupDetail from '../components/group/GroupDetail';
 import GroupSetting from './group/GroupSetting';
