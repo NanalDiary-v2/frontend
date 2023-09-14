@@ -284,9 +284,11 @@ function GroupCreate({ setGroupCompo, setGroupIdx }) {
                   if (data.statusCode === 200) {
                     if (data.data.responseMessage === '그림 저장 성공') {
                       if (includeFriend.length !== 0) {
+                        console.log(groupidx);
+                        console.log(includeFriendIdx);
                         axios_api
                           .post('notification/group', {
-                            request_group_idx: groupidx,
+                            request_group_idx: [groupidx],
                             userIdx: includeFriendIdx,
                           })
                           .then(({ data }) => {

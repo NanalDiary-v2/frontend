@@ -7,9 +7,9 @@ import { onLogin } from '../../config/Login';
 import { BrowserView, MobileView, isMobile } from 'react-device-detect';
 
 function GroupUpdate({ groupIdx, setGroupCompo }) {
-  const mobile = isMobile;
-
   const { state } = useLocation();
+  const groupId = isMobile ? state.groupIdx : groupIdx;
+
   const navigate = useNavigate();
 
   const [mGroupIdx, setmGroupIdx] = useState(0);
@@ -191,7 +191,7 @@ function GroupUpdate({ groupIdx, setGroupCompo }) {
                             .then(({ data }) => {
                               if (data.statusCode === 200) {
                                 if (data.data.responseMessage === '알림 저장 성공') {
-                                  mobile
+                                  isMobile
                                     ? navigate(`/Group/Setting`, {
                                         state: { mGroupIdx: mGroupIdx },
                                         replace: true,
@@ -208,7 +208,7 @@ function GroupUpdate({ groupIdx, setGroupCompo }) {
                               console.log('알림 저장 오류 : ' + error);
                             });
                         } else {
-                          mobile
+                          isMobile
                             ? navigate(`/Group/Setting`, {
                                 state: { mGroupIdx: mGroupIdx },
                                 replace: true,
@@ -228,7 +228,7 @@ function GroupUpdate({ groupIdx, setGroupCompo }) {
               } else {
                 // 이미지를 변경하지 않는 경우
                 // 그룹에 추가할 친구가 있는 경우
-                if (mobile === true) {
+                if (isMobile === true) {
                   if (includeFriend.length !== 0) {
                     axios_api
                       .post('notification/group', {
@@ -261,7 +261,7 @@ function GroupUpdate({ groupIdx, setGroupCompo }) {
                 } else {
                   axios_api
                     .post('notification/group', {
-                      request_group_idx: [groupIdx],
+                      request_group_idx: [mGroupIdx],
                       userIdx: includeFriendIdx,
                     })
                     .then(({ data }) => {
@@ -296,7 +296,7 @@ function GroupUpdate({ groupIdx, setGroupCompo }) {
   useEffect(() => {
     onLogin();
     axios_api
-      .get(`/group/${mobile ? state.groupDetail : groupIdx}`)
+      .get(`/group/${groupId}`)
       .then(({ data }) => {
         if (data.statusCode === 200) {
           setGroupName(null);
@@ -304,7 +304,7 @@ function GroupUpdate({ groupIdx, setGroupCompo }) {
           currentName.current = [];
           if (data.data.responseMessage === '그룹 조회 성공') {
             // console.log(data.data.groupDetail);
-            if (mobile === true) {
+            if (isMobile === true) {
               setmGroupIdx(data.data.groupDetail.mGroupIdx);
             }
             setGroupName(data.data.groupDetail.groupName);
