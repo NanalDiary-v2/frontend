@@ -8,9 +8,9 @@ import FriendItem from '../friend/FriendItem';
 import { BrowserView, MobileView, isMobile } from 'react-device-detect';
 
 function GroupSetting({ groupIdx, setGroupCompo }) {
-  const mobile = isMobile;
-
   const { state } = useLocation();
+  const groupId = isMobile ? state.groupIdx : groupIdx;
+
   const navigate = useNavigate();
 
   const [groupDetail, setGroupName] = useState('');
@@ -36,11 +36,11 @@ function GroupSetting({ groupIdx, setGroupCompo }) {
       if (result.isConfirmed) {
         // 확인(예) 버튼 클릭 시 이벤트
         axios_api
-          .delete(`group/${mobile ? state.groupIdx : groupIdx}`)
+          .delete(`group/${groupId}`)
           .then(({ data }) => {
             if (data.statusCode === 200) {
               if (data.data.responseMessage === '그룹 탈퇴 성공') {
-                mobile
+                isMobile
                   ? navigate('/Group/List')
                   : Swal.fire({
                       title: '그룹 나가기',
@@ -71,7 +71,7 @@ function GroupSetting({ groupIdx, setGroupCompo }) {
   useEffect(() => {
     onLogin();
     axios_api
-      .get(`/group/${state.groupIdx}`)
+      .get(`/group/${groupId}`)
       .then(({ data }) => {
         if (data.statusCode === 200) {
           setGroupName(null);
