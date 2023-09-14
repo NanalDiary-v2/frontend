@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
-import LogoHome from '../components/LogoHome.js';
-import Calendar from '../components/Calendaar.js';
-import BookCase from '../components/BookCase.js';
+import LogoHome from '../mobileComponents/LogoHome.js';
+import Calendar from '../mobileComponents/Calendaar.js';
+import BookCase from '../mobileComponents/BookCase.js';
 import SignIn from '../components/account/SignIn.js';
 import SignUp from '../components/account/SignUp.js';
 import KakaoLogin from '../components/account/KaKaoLogin.js';
@@ -19,7 +19,6 @@ import FriendList from '../components/friend/FriendList';
 import FriendDetail from '../components/friend/FriendDetail';
 import FriendAdd from '../components/friend/FriendAdd';
 import AlarmList from '../components/another/AlarmList.js';
-// import AlarmItem from '../components/another/AlarmItem.js';
 import MyPage from '../components/mypage/MyPage.js';
 import Tuning from '../components/mypage/setting/Tuning';
 import TrashCan from '../components/another/TrashCan.js';

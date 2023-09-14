@@ -3,7 +3,6 @@ import bell from '../src_assets/img/bell.svg';
 import logo from '../src_assets/img/nanalLogo.svg';
 import Tuning from '../webComponents/setting/Tuning';
 import AlarmList from '../components/another/AlarmList';
-// import { Link } from 'react-router-dom';
 import { onLogin } from '../config/Login';
 import axios_api from '../config/Axios';
 
