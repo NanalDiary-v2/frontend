@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import axios_api from '../../config/Axios';
 import { onLogin } from '../../config/Login';
 import DiaryList from '../diary/DiaryList';
-import { BrowserView, MobileView } from 'react-device-detect';
+import { BrowserView, MobileView, isMobile } from 'react-device-detect';
 import settingIcon from '../../src_assets/img/setting_icon.png';
 import ballpenIcon from '../../src_assets/img/ballpen_icon.png';
 
 function GroupDetail({ groupIdx, setGroupCompo }) {
   const { state } = useLocation();
+  const groupId = isMobile ? state.groupIdx : groupIdx;
+
   const navigate = useNavigate();
 
   const [groupDetail, setGroupDetail] = useState('');
@@ -18,7 +20,7 @@ function GroupDetail({ groupIdx, setGroupCompo }) {
   useEffect(() => {
     onLogin();
     axios_api
-      .get(`/group/${state.groupIdx}`)
+      .get(`/group/${groupId}`)
       .then(({ data }) => {
         if (data.statusCode === 200) {
           setGroupDetail(null);
@@ -94,7 +96,7 @@ function GroupDetail({ groupIdx, setGroupCompo }) {
           ></img>
           <hr className='mx-auto mt-5 border-dashed w-80 border-1 border-slate-400' />
           {/* 일기 리스트 */}
-          <DiaryList isToggle={state.isToggle} groupIdx={state.groupIdx} />
+          <DiaryList isToggle={isMobile ? state.isToggle : 2} groupIdx={groupId} />
         </div>
       </MobileView>
 
