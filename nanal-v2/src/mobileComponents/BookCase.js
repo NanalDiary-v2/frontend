@@ -99,7 +99,6 @@ function BookCase() {
         if (data.statusCode === 200) {
           SetEmotion(null);
           if (data.data.responseMessage === '감정 조회 성공') {
-            console.log(data.data);
             SetEmotion(data.data.emotions);
           }
         } else {
