@@ -18,14 +18,7 @@ function BookCase() {
 
   const [Collocate, setCollocate] = useState(true);
   const [emotion, SetEmotion] = useState([]);
-  const [emotionDisplay, SetEmotionDisplay] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [emotionDisplay, SetEmotionDisplay] = useState([false, false, false, false, false, false]);
 
   const changeCollocate = () => {
     setCollocate((Collocate) => !Collocate);
@@ -106,10 +99,8 @@ function BookCase() {
         if (data.statusCode === 200) {
           SetEmotion(null);
           if (data.data.responseMessage === '감정 조회 성공') {
+            console.log(data.data);
             SetEmotion(data.data.emotions);
-            // console.log(data.data.emotions);
-          } else if (data.data.responseMessage === '데이터 없음') {
-            // console.log('데이터 없음');
           }
         } else {
           console.log('감정 조회 오류 : ');
@@ -170,10 +161,7 @@ function BookCase() {
                   }}
                   className='box-border relative grid items-center w-20 h-20 overflow-hidden text-center rounded-md border-zinc-400'
                 >
-                  <img
-                    src={groupList[0].groupDetail.imgUrl}
-                    className='object-cover'
-                  ></img>
+                  <img src={groupList[0].groupDetail.imgUrl} className='object-cover'></img>
                 </Link>
               )}
             </div>
@@ -197,10 +185,7 @@ function BookCase() {
                   }}
                   className='box-border relative grid items-center w-20 h-20 overflow-hidden text-center rounded-md border-zinc-400'
                 >
-                  <img
-                    src={groupList[1].groupDetail.imgUrl}
-                    className='object-cover'
-                  ></img>
+                  <img src={groupList[1].groupDetail.imgUrl} className='object-cover'></img>
                 </Link>
               )}
             </div>
@@ -215,10 +200,7 @@ function BookCase() {
                   }}
                   className='box-border relative grid items-center w-20 h-20 overflow-hidden text-center rounded-md border-zinc-400'
                 >
-                  <img
-                    src={groupList[2].groupDetail.imgUrl}
-                    className='object-cover'
-                  ></img>
+                  <img src={groupList[2].groupDetail.imgUrl} className='object-cover'></img>
                 </Link>
               )}
             </div>
@@ -242,10 +224,7 @@ function BookCase() {
                   }}
                   className='box-border relative grid items-center w-20 h-20 overflow-hidden text-center rounded-md border-zinc-400'
                 >
-                  <img
-                    src={groupList[3].groupDetail.imgUrl}
-                    className='object-cover'
-                  ></img>
+                  <img src={groupList[3].groupDetail.imgUrl} className='object-cover'></img>
                 </Link>
               )}
             </div>
@@ -304,9 +283,7 @@ function BookCase() {
         />
         <div>
           {emotion && emotionDisplay[0] === true ? (
-            <div
-              className={`w-16 p-2 text-center rounded-lg bg-zinc-100 ${emoTextCss} ${joyCss}`}
-            >
+            <div className={`w-16 p-2 text-center rounded-lg bg-zinc-100 ${emoTextCss} ${joyCss}`}>
               {emotion && emotion.joy
                 ? emotion.joy.nickname.map((name, idx) => {
                     return (
@@ -319,9 +296,7 @@ function BookCase() {
             </div>
           ) : null}
           {emotion && emotionDisplay[1] === true ? (
-            <div
-              className={`w-16 p-2 text-center rounded-lg bg-zinc-100 ${emoTextCss} ${calmCss}`}
-            >
+            <div className={`w-16 p-2 text-center rounded-lg bg-zinc-100 ${emoTextCss} ${calmCss}`}>
               {emotion && emotion.calm
                 ? emotion.calm.nickname.map((name, idx) => {
                     return (
@@ -334,9 +309,7 @@ function BookCase() {
             </div>
           ) : null}
           {emotion && emotionDisplay[2] === true ? (
-            <div
-              className={`w-16 p-2 text-center rounded-lg bg-zinc-100 ${emoTextCss} ${nervCss}`}
-            >
+            <div className={`w-16 p-2 text-center rounded-lg bg-zinc-100 ${emoTextCss} ${nervCss}`}>
               {emotion && emotion.nerv
                 ? emotion.nerv.nickname.map((name, idx) => {
                     return (
@@ -349,9 +322,7 @@ function BookCase() {
             </div>
           ) : null}
           {emotion && emotionDisplay[3] === true ? (
-            <div
-              className={`w-16 p-2 text-center rounded-lg bg-zinc-100 ${emoTextCss} ${angCss}`}
-            >
+            <div className={`w-16 p-2 text-center rounded-lg bg-zinc-100 ${emoTextCss} ${angCss}`}>
               {emotion && emotion.ang
                 ? emotion.ang.nickname.map((name, idx) => {
                     return (
@@ -364,9 +335,7 @@ function BookCase() {
             </div>
           ) : null}
           {emotion && emotionDisplay[4] === true ? (
-            <div
-              className={`w-16 p-2 text-center rounded-lg bg-zinc-100 ${emoTextCss} ${embCss}`}
-            >
+            <div className={`w-16 p-2 text-center rounded-lg bg-zinc-100 ${emoTextCss} ${embCss}`}>
               {emotion && emotion.emb
                 ? emotion.emb.nickname.map((name, idx) => {
                     return (
@@ -379,9 +348,7 @@ function BookCase() {
             </div>
           ) : null}
           {emotion && emotionDisplay[5] === true ? (
-            <div
-              className={`w-16 p-2 text-center rounded-lg bg-zinc-100 ${emoTextCss} ${sadCss}`}
-            >
+            <div className={`w-16 p-2 text-center rounded-lg bg-zinc-100 ${emoTextCss} ${sadCss}`}>
               {emotion && emotion.sad
                 ? emotion.sad.nickname.map((name, idx) => {
                     return (
@@ -398,9 +365,7 @@ function BookCase() {
           className='text-[12px] box-border rounded-full bg-slate-100/50 h-16 w-16 absolute'
           onClick={changeCollocate}
         >
-          <p>
-            {Collocate === true ? '감정 정령들 되돌리기' : '감정 정령들 보기'}
-          </p>
+          <p>{Collocate === true ? '감정 정령들 되돌리기' : '감정 정령들 보기'}</p>
         </button>
       </div>
 

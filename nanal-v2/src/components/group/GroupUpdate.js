@@ -150,7 +150,7 @@ function GroupUpdate({ groupIdx, setGroupCompo }) {
         .then(({ data }) => {
           if (data.statusCode === 200) {
             if (data.data.responseMessage === '그룹 수정 성공') {
-              const mGroupIdx = data.data.groupDetail.mGroupIdx;
+              const mGroupIdx = data.data.groupDetail.groupIdx;
 
               if (isImgChecked === true) {
                 // 이미지를 변경하는 경우
@@ -305,13 +305,13 @@ function GroupUpdate({ groupIdx, setGroupCompo }) {
           if (data.data.responseMessage === '그룹 조회 성공') {
             // console.log(data.data.groupDetail);
             if (isMobile === true) {
-              setmGroupIdx(data.data.groupDetail.mGroupIdx);
+              setmGroupIdx(data.data.groupDetail.groupIdx);
             }
             setGroupName(data.data.groupDetail.groupName);
             setGroupTag(data.data.tags);
             setGroupImg(data.data.groupDetail.imgUrl);
             setGroupImgIdx(data.data.groupDetail.groupImgIdx);
-            const mGroupIdx = data.data.groupDetail.mGroupIdx;
+            const mGroupIdx = data.data.groupDetail.groupIdx;
             currentName.current = data.data.groupDetail.groupName;
             // currentTag.current = data.data.tags;
 
